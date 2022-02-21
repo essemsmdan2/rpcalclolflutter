@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "374186719221",
+    "project_id": "rpcalc-6e660",
+    "storage_bucket": "rpcalc-6e660.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374186719221:android:3cea80a4eb7185ee6212bc",
+        "android_client_info": {
+          "package_name": "com.frictionsa.rpcalclol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "374186719221-r5n4r4kvs9p57eekeoso4acp50j4b8s7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9_PyQVEC1SYr4QHuXSORGi_JX795ZIAQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "374186719221-r5n4r4kvs9p57eekeoso4acp50j4b8s7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
