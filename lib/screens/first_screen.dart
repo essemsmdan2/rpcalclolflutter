@@ -16,20 +16,20 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
+  Calculator arrayResults = Calculator();
   @override
   void initState() {
     super.initState();
     //habilitar essa linha abaixo, apenas quando precisar enviar updates para o firebase
     //UpdateStatus().updatePaymentTypes();
 
-    Calculator().updateArrayResult();
+    arrayResults.updateArrayResult();
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
   }
 
-  Calculator arrayResults = Calculator();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
