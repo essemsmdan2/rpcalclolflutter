@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-
+import 'firebase/send_and_get_firebasestore.dart';
 import 'components/list_builder.dart';
 
-var _arrayResult = [];
+var _arrayResultFromGet = [];
 
+UpdateStatus updateStatus = UpdateStatus();
 int rpPrice = 0;
 
 class Calculator {
+  void updateArrayResult() async {
+    _arrayResultFromGet = await updateStatus.getUpdatePaymentTypes();
+  }
+
   sendRpPrice(String inputRp) {
     if (inputRp.isNotEmpty) {
       toggleShowList(true);
@@ -20,13 +25,13 @@ class Calculator {
   getResults() {
     criaResultadosArray();
 
-    return _arrayResult;
+    return _arrayResultFromGet;
   }
 
   criaResultadosArray() {
     //faz um for em todas as opções de objMetodoPag e verifica os que são compativeis com o valor digitado e retorna o  "arrayResult" com os valores compatíveis, intercalados em 2 indexs
-    if (_arrayResult.isNotEmpty) {
-      _arrayResult = [];
+    if (_arrayResultFromGet.isNotEmpty) {
+      _arrayResultFromGet = [];
     }
     var rp = rpPrice;
 
@@ -43,7 +48,7 @@ class Calculator {
           _MapResult["NomePagamento"] = mapMetodoPag.keys;
           _MapResult["PreçoRp"] = objPreco['RP'];
           _MapResult["PreçoMoeda"] = objPreco['R\$']?.floor();
-          _arrayResult.add(_MapResult);
+          _arrayResultFromGet.add(_MapResult);
         }
       }
     }

@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:rpcalclol/firebase/send_update_payment_methods.dart';
+import 'package:rpcalclol/firebase/send_and_get_firebasestore.dart';
 import '../constants.dart';
 import 'package:flutter/material.dart';
 import '../components/type_rp_menu.dart';
@@ -19,8 +19,11 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   void initState() {
     super.initState();
+    //habilitar essa linha abaixo, apenas quando precisar enviar updates para o firebase
+    //UpdateStatus().updatePaymentTypes();
 
-    UpdateStatus().updatePaymentTypes();
+    Calculator().updateArrayResult();
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
