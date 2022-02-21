@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.frictionsa.rpcalclol">
    <application
-        android:label="rpcalclol"
+        android:label="RpCalcLol"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
