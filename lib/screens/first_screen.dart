@@ -21,7 +21,6 @@ class _FirstScreenState extends State<FirstScreen> {
   void initState() {
     super.initState();
     //habilitar essa linha abaixo, apenas quando precisar enviar updates para o firebase
-    //UpdateStatus().updatePaymentTypes();
 
     arrayResults.updateArrayResult();
 

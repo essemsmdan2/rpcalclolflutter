@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UpdateStatus {
+class FireBaseHandler {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   List _arrayTiposPag = [];
   List _cartaoBoleto = [
@@ -8,7 +8,7 @@ class UpdateStatus {
       //Pg-Domestico - Boleto bancário - Gold,Paypal,Pagseguro - Itaú,Banco do Brasil,Bradesco, HSBC - VISA, MASTERCARD, HIPERCARD,AURA,ELO,DISCOVER,ALGUM OUTRO
 
       'Cartão/Boleto': [
-        {'R\$': 13.65, 'RP': 650},
+        {'R\$': 13.65, 'RP': 790},
         {'R\$': 27.25, 'RP': 1300},
         {'R\$': 54.5, 'RP': 2600},
         {'R\$': 95.5, 'RP': 4550},
@@ -42,7 +42,16 @@ class UpdateStatus {
   CollectionReference _firestorageCollectionPaymentTypes = FirebaseFirestore.instance.collection('paymentTypes');
 
   Future<void> sendUpdatePaymentTypes() async {
-    //return paymentTypes.add({'test': 'test'}).then((value) => print("User Added")).catchError((error) => print("Failed to add user: $error"));
+    await _firestorageCollectionPaymentTypes
+        .get()
+        .then((value) => {
+              value.docs.forEach((snapshot) {
+                snapshot.reference.delete();
+              })
+            })
+        .then((value) => print('deleted'));
+
+    //return paymentTypes.add({'test': 'test'}).then((value) => print("User Added")).catchError((error) => print("Failed to' add user: $error"));
     try {
       for (final payment in _cartaoBoleto) {
         _firestorageCollectionPaymentTypes.add(payment).then((value) => print("User Added")).catchError((error) => print("Failed to add user: $error"));

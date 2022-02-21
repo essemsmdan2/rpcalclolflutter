@@ -18,13 +18,11 @@ class ListResults extends StatelessWidget {
         padding: EdgeInsets.all(0),
         itemCount: items.length,
         itemBuilder: (context, index) {
-          return GestureDetector(
-              onTap: () {},
-              child: BuildCards(
-                nomePagamento: items[index]["NomePagamento"].single.toString(),
-                precoMoeda: items[index]["PreçoMoeda"].toString(),
-                precoRp: items[index]["PreçoRp"].toString(),
-              ));
+          return BuildCards(
+            nomePagamento: items[index]["NomePagamento"].single.toString(),
+            precoMoeda: items[index]["PreçoMoeda"].toString(),
+            precoRp: items[index]["PreçoRp"].toString(),
+          );
         });
   }
 }
@@ -54,7 +52,7 @@ class BuildCards extends StatelessWidget {
             height: 8,
           ),
           Text(
-            "RP: $precoRp - R\$: $precoMoeda,00 ",
+            "RP: $precoRp - R\$: $precoMoeda ",
             textAlign: TextAlign.center,
             style: kresultText,
           ),

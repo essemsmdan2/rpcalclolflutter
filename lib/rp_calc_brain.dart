@@ -4,11 +4,13 @@ import 'components/list_builder.dart';
 
 var _arrayResultFromShuffle = [];
 
-UpdateStatus updateStatus = UpdateStatus();
-int rpPrice = 0;
+FireBaseHandler updateStatus = FireBaseHandler();
+double rpPrice = 0;
 
 class Calculator {
   void updateArrayResult() async {
+    //usar a linha a baixo apenas em ambiente de desenvolvimento
+    //await FireBaseHandler().sendUpdatePaymentTypes();
     arrayTiposPag = await updateStatus.getUpdatePaymentTypes();
   }
 
@@ -16,7 +18,7 @@ class Calculator {
     if (inputRp.isNotEmpty) {
       toggleShowList(true);
 
-      rpPrice = int.parse(inputRp);
+      rpPrice = double.parse(inputRp);
     } else {
       toggleShowList(false);
     }
@@ -47,7 +49,7 @@ class Calculator {
           var _MapResult = Map();
           _MapResult["NomePagamento"] = mapMetodoPag.keys;
           _MapResult["PreçoRp"] = objPreco['RP'];
-          _MapResult["PreçoMoeda"] = objPreco['R\$']?.floor();
+          _MapResult["PreçoMoeda"] = objPreco['R\$'].toStringAsFixed(2);
           _arrayResultFromShuffle.add(_MapResult);
         }
       }
