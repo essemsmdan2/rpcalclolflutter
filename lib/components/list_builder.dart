@@ -38,7 +38,18 @@ class BuildCards extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(color: kPrimaryColor.withOpacity(0.9), borderRadius: BorderRadius.circular(10)),
+      decoration: BoxDecoration(
+        color: kPrimaryColor.withOpacity(0.9),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 0),
+            blurRadius: 5,
+            spreadRadius: 2,
+            color: Colors.purpleAccent.shade100,
+          ),
+        ],
+      ),
       margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

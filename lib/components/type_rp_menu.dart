@@ -26,8 +26,17 @@ class _TypeRpMenuState extends State<TypeRpMenu> {
       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
       decoration: BoxDecoration(
-          color: kPrimaryColor.withOpacity(0.9),
-          borderRadius: BorderRadius.circular(10)),
+        color: kPrimaryColor.withOpacity(0.9),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 0),
+            blurRadius: 5,
+            spreadRadius: 2,
+            color: Colors.purpleAccent.shade100,
+          ),
+        ],
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -38,8 +47,7 @@ class _TypeRpMenuState extends State<TypeRpMenu> {
           ),
           const SizedBox(height: 15),
           Container(
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(5)),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
             padding: const EdgeInsets.all(10),
             child: IntrinsicHeight(
               child: Row(
@@ -59,16 +67,13 @@ class _TypeRpMenuState extends State<TypeRpMenu> {
                   Expanded(
                     child: TextField(
                       keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
-                      ],
+                      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
                       onChanged: (value) {
                         widget.onChanged(value);
                       },
                       controller: myController,
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(0),
