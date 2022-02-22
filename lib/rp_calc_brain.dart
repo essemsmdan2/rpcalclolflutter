@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'firebase/send_and_get_firebasestore.dart';
 import 'components/list_builder.dart';
 
@@ -7,10 +6,10 @@ var _arrayResultFromShuffle = [];
 FireBaseHandler updateStatus = FireBaseHandler();
 double rpPrice = 0;
 
-class Calculator {
+class RpCalcBrain {
   void updateArrayResult() async {
-    //usar a linha a baixo apenas em ambiente de desenvolvimento
-    //await FireBaseHandler().sendUpdatePaymentTypes();
+    // usar a linha a baixo apenas em ambiente de desenvolvimento
+    await FireBaseHandler().sendUpdatePaymentTypes();
     arrayTiposPag = await updateStatus.getUpdatePaymentTypes();
   }
 

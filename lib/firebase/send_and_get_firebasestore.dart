@@ -3,17 +3,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class FireBaseHandler {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   List _arrayTiposPag = [];
+  //a lista abaixo só é de uso em ambiente de desenvolvimento para update
   List _cartaoBoleto = [
     {
       //Pg-Domestico - Boleto bancário - Gold,Paypal,Pagseguro - Itaú,Banco do Brasil,Bradesco, HSBC - VISA, MASTERCARD, HIPERCARD,AURA,ELO,DISCOVER,ALGUM OUTRO
 
       'Cartão/Boleto': [
-        {'R\$': 13.65, 'RP': 790},
-        {'R\$': 27.25, 'RP': 1300},
-        {'R\$': 54.5, 'RP': 2600},
-        {'R\$': 95.5, 'RP': 4550},
-        {'R\$': 136.25, 'RP': 6500},
-        {'R\$': 272.5, 'RP': 13000},
+        {'R\$': 16.00, 'RP': 650},
+        {'R\$': 32.00, 'RP': 1300},
+        {'R\$': 64.00, 'RP': 2600},
+        {'R\$': 113.00, 'RP': 4590},
+        {'R\$': 160.00, 'RP': 6500},
+        {'R\$': 320.00, 'RP': 13000},
       ],
     },
   ];
@@ -21,12 +22,12 @@ class FireBaseHandler {
   List _paySafe = [
     {
       'PaySafe': [
-        {'R\$': 10.0, 'RP': 480},
-        {'R\$': 20.0, 'RP': 960},
-        {'R\$': 25.0, 'RP': 1200},
-        {'R\$': 40.0, 'RP': 1920},
-        {'R\$': 50.0, 'RP': 2400},
-        {'R\$': 100.0, 'RP': 4800},
+        {'R\$': 10.0, 'RP': 405},
+        {'R\$': 20.0, 'RP': 810},
+        {'R\$': 25.0, 'RP': 1015},
+        {'R\$': 40.0, 'RP': 1620},
+        {'R\$': 50.0, 'RP': 2025},
+        {'R\$': 100.0, 'RP': 4050},
       ],
     },
   ];
@@ -40,7 +41,7 @@ class FireBaseHandler {
   ];
 
   CollectionReference _firestorageCollectionPaymentTypes = FirebaseFirestore.instance.collection('paymentTypes');
-
+//esse metodo está sendo implementado no arquivo  RpCalcBrain.updateArrayResult
   Future<void> sendUpdatePaymentTypes() async {
     await _firestorageCollectionPaymentTypes
         .get()

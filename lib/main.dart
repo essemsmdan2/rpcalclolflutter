@@ -20,3 +20,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+//TODO:Adicionar uma splashArt para inicio do app
+//TODO: Atualizar os preços com o mercado

@@ -16,13 +16,13 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-  Calculator arrayResults = Calculator();
+  RpCalcBrain arrayResults = RpCalcBrain();
   @override
   void initState() {
     super.initState();
-    //habilitar essa linha abaixo, apenas quando precisar enviar updates para o firebase
 
-    arrayResults.updateArrayResult();
+    //dentro deste metodo existe uma opção para update dos valores
+    //arrayResults.updateArrayResult();
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -74,7 +74,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     TypeRpMenu(
                       onChanged: (value) {
                         setState(() {
-                          Calculator().sendRpPrice(value);
+                          RpCalcBrain().sendRpPrice(value);
                         });
                       },
                     ),

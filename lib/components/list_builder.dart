@@ -8,7 +8,7 @@ void toggleShowList(bool value) {
 }
 
 class ListResults extends StatelessWidget {
-  Calculator arrayResults = Calculator();
+  RpCalcBrain arrayResults = RpCalcBrain();
   var items;
   ListResults({Key? key, required this.items}) : super(key: key);
 
