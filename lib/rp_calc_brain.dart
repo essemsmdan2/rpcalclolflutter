@@ -9,7 +9,7 @@ double rpPrice = 0;
 class RpCalcBrain {
   void updateArrayResult() async {
     // usar a linha a baixo apenas em ambiente de desenvolvimento
-    await FireBaseHandler().sendUpdatePaymentTypes();
+    //await FireBaseHandler().sendUpdatePaymentTypes();
     arrayTiposPag = await updateStatus.getUpdatePaymentTypes();
   }
 
