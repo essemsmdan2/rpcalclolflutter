@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:rpcalclol/screens/second_screen.dart';
 
 import '../constants.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _FirstScreenState extends State<FirstScreen> {
           actions: [
             TextButton(
               onPressed: () {
-                launch('https://www.buymeacoffee.com/essemsmdan');
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MySecondPage()));
               },
               child: const Icon(
                 Icons.coffee_rounded,
