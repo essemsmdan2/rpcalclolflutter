@@ -1,0 +1,3 @@
+class PaymentTypes {
+  String nameType = "";
+}
