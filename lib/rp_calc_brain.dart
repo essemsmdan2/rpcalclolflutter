@@ -1,5 +1,5 @@
-import 'firebase/send_and_get_firebasestore.dart';
-import 'components/list_builder.dart';
+import 'package:rpcalclol/app/repository/firebase/firebase_repository.dart';
+import 'package:rpcalclol/app/presentation/pages/home/components/list_builder.dart';
 
 var _arrayResultFromShuffle = [];
 
@@ -9,7 +9,7 @@ double rpPrice = 0;
 class RpCalcBrain {
   void updateArrayResult() async {
     // usar a linha a baixo apenas em ambiente de desenvolvimento
-    //await FireBaseHandler().sendUpdatePaymentTypes();
+    await FireBaseHandler().sendUpdatePaymentTypes();
     arrayTiposPag = await updateStatus.getUpdatePaymentTypes();
   }
 
@@ -45,7 +45,7 @@ class RpCalcBrain {
         var objPreco = arrayObjprecos[index];
 
         if (objPreco['RP']! >= rp && objPreco['RP']! <= rp * 2) {
-          var _MapResult = Map();
+          var _MapResult = {};
           _MapResult["NomePagamento"] = mapMetodoPag.keys;
           _MapResult["PreçoRp"] = objPreco['RP'];
           _MapResult["PreçoMoeda"] = objPreco['R\$'].toStringAsFixed(2);

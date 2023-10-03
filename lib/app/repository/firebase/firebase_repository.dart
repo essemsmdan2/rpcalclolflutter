@@ -1,13 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FireBaseHandler {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-  List _arrayTiposPag = [];
+  FireBaseHandler() {
+    firestore = FirebaseFirestore.instance;
+    _firestorageCollectionPaymentTypes = firestore.collection('paymentTypes');
+  }
+  late final FirebaseFirestore firestore;
+  late final CollectionReference _firestorageCollectionPaymentTypes;
+  final List _arrayTiposPag = [];
   //a lista abaixo só é de uso em ambiente de desenvolvimento para update
-  List _cartaoBoleto = [
+  final List _cartaoBoleto = [
     {
-      //Pg-Domestico - Boleto bancário - Gold,Paypal,Pagseguro - Itaú,Banco do Brasil,Bradesco, HSBC - VISA, MASTERCARD, HIPERCARD,AURA,ELO,DISCOVER,ALGUM OUTRO
-
       'Cartão/Boleto': [
         {'R\$': 16.00, 'RP': 650},
         {'R\$': 32.00, 'RP': 1300},
@@ -18,8 +21,7 @@ class FireBaseHandler {
       ],
     },
   ];
-
-  List _paySafe = [
+  final List _paySafe = [
     {
       'PaySafe': [
         {'R\$': 10.0, 'RP': 405},
@@ -31,7 +33,7 @@ class FireBaseHandler {
       ],
     },
   ];
-  List _celular = [
+  final List _celular = [
     {
       'CelularSms': [
         {'R\$': 4.99, 'RP': 135},
@@ -40,9 +42,7 @@ class FireBaseHandler {
     },
   ];
 
-  CollectionReference _firestorageCollectionPaymentTypes = FirebaseFirestore.instance.collection('paymentTypes');
-//esse metodo está sendo implementado no arquivo  RpCalcBrain.updateArrayResult
-  Future<void> sendUpdatePaymentTypes() async {
+  sendUpdatePaymentTypes() async {
     await _firestorageCollectionPaymentTypes
         .get()
         .then((value) => {
@@ -55,13 +55,22 @@ class FireBaseHandler {
     //return paymentTypes.add({'test': 'test'}).then((value) => print("User Added")).catchError((error) => print("Failed to' add user: $error"));
     try {
       for (final payment in _cartaoBoleto) {
-        _firestorageCollectionPaymentTypes.add(payment).then((value) => print("User Added")).catchError((error) => print("Failed to add user: $error"));
+        _firestorageCollectionPaymentTypes
+            .add(payment)
+            .then((value) => print("User Added"))
+            .catchError((error) => print("Failed to add user: $error"));
       }
       for (final payment in _paySafe) {
-        _firestorageCollectionPaymentTypes.add(payment).then((value) => print("User Added")).catchError((error) => print("Failed to add user: $error"));
+        _firestorageCollectionPaymentTypes
+            .add(payment)
+            .then((value) => print("User Added"))
+            .catchError((error) => print("Failed to add user: $error"));
       }
       for (final payment in _celular) {
-        _firestorageCollectionPaymentTypes.add(payment).then((value) => print("User Added")).catchError((error) => print("Failed to add user: $error"));
+        _firestorageCollectionPaymentTypes
+            .add(payment)
+            .then((value) => print("User Added"))
+            .catchError((error) => print("Failed to add user: $error"));
       }
     } catch (e) {
       print(e);

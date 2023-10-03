@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../constants.dart';
+import 'package:rpcalclol/app/core/constants.dart';
 
 class TypeRpMenu extends StatefulWidget {
   Function onChanged;
@@ -30,7 +30,7 @@ class _TypeRpMenuState extends State<TypeRpMenu> {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, 0),
+            offset: const Offset(0, 0),
             blurRadius: 5,
             spreadRadius: 2,
             color: Colors.purpleAccent.shade100,
@@ -47,12 +47,13 @@ class _TypeRpMenuState extends State<TypeRpMenu> {
           ),
           const SizedBox(height: 15),
           Container(
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(5)),
             padding: const EdgeInsets.all(10),
             child: IntrinsicHeight(
               child: Row(
                 children: [
-                  Text(
+                  const Text(
                     'RP',
                     style: TextStyle(
                       fontSize: 18,
@@ -60,21 +61,24 @@ class _TypeRpMenuState extends State<TypeRpMenu> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  VerticalDivider(
+                  const VerticalDivider(
                     thickness: 3.0,
                     color: Colors.black,
                   ),
                   Expanded(
                     child: TextField(
                       keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+                      ],
                       onChanged: (value) {
                         widget.onChanged(value);
                       },
                       controller: myController,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      decoration: InputDecoration(
+                      style:
+                          const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(0),
                         floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -83,7 +87,7 @@ class _TypeRpMenuState extends State<TypeRpMenu> {
                       ),
                     ),
                   ),
-                  Image(
+                  const Image(
                     image: AssetImage('images/RP.png'),
                     width: 35,
                   ),

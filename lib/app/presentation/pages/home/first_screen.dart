@@ -1,17 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:rpcalclol/screens/second_screen.dart';
 
-import '../constants.dart';
 import 'package:flutter/material.dart';
-import '../components/type_rp_menu.dart';
-import '../components/list_builder.dart';
+import 'package:rpcalclol/app/presentation/pages/consumable_page/second_screen.dart';
+import 'package:rpcalclol/app/presentation/pages/home/components/list_builder.dart';
+import 'package:rpcalclol/app/presentation/pages/home/components/type_rp_menu.dart';
+
+import 'package:rpcalclol/app/core/constants.dart';
+
 import 'package:rpcalclol/rp_calc_brain.dart';
 
-import 'package:url_launcher/url_launcher.dart';
-
 class FirstScreen extends StatefulWidget {
-  FirstScreen({
+  const FirstScreen({
     Key? key,
   }) : super(key: key);
 
@@ -26,7 +25,7 @@ class _FirstScreenState extends State<FirstScreen> {
     super.initState();
 
     //dentro deste metodo existe uma opção para update dos valores
-    // arrayResults.updateArrayResult();
+    arrayResults.updateArrayResult();
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -41,7 +40,10 @@ class _FirstScreenState extends State<FirstScreen> {
           actions: [
             TextButton(
               onPressed: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => MySecondPage()));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => const MySecondPage()));
               },
               child: const Icon(
                 Icons.coffee_rounded,
@@ -70,7 +72,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 )
               ],
@@ -105,9 +107,9 @@ class _FirstScreenState extends State<FirstScreen> {
             ),
             showList == true
                 ? Container(
-                    margin: EdgeInsets.symmetric(horizontal: 25),
+                    margin: const EdgeInsets.symmetric(horizontal: 25),
                     height: 5,
-                    decoration: BoxDecoration(boxShadow: [
+                    decoration: const BoxDecoration(boxShadow: [
                       BoxShadow(
                           color: Colors.black,
                           offset: Offset(0, 2),
@@ -115,7 +117,7 @@ class _FirstScreenState extends State<FirstScreen> {
                           spreadRadius: 3)
                     ]),
                   )
-                : SizedBox(
+                : const SizedBox(
                     height: 1,
                   ),
             showList == true
@@ -125,7 +127,7 @@ class _FirstScreenState extends State<FirstScreen> {
                       items: arrayResults.getResults(),
                     ),
                   )
-                : SizedBox(
+                : const SizedBox(
                     height: 10,
                   ),
           ]),

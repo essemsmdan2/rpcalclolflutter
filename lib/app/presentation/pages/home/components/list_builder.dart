@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rpcalclol/constants.dart';
+import 'package:rpcalclol/app/core/constants.dart';
 import 'package:rpcalclol/rp_calc_brain.dart';
 
 bool showList = false;
@@ -15,7 +15,7 @@ class ListResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        padding: EdgeInsets.all(0),
+        padding: const EdgeInsets.all(0),
         itemCount: items.length,
         itemBuilder: (context, index) {
           return BuildCards(
@@ -28,7 +28,12 @@ class ListResults extends StatelessWidget {
 }
 
 class BuildCards extends StatelessWidget {
-  const BuildCards({Key? key, required this.nomePagamento, required this.precoMoeda, required this.precoRp}) : super(key: key);
+  const BuildCards(
+      {Key? key,
+      required this.nomePagamento,
+      required this.precoMoeda,
+      required this.precoRp})
+      : super(key: key);
 
   final String nomePagamento;
   final String precoMoeda;
@@ -37,13 +42,13 @@ class BuildCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: kPrimaryColor.withOpacity(0.9),
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, 0),
+            offset: const Offset(0, 0),
             blurRadius: 5,
             spreadRadius: 2,
             color: Colors.purpleAccent.shade100,
@@ -59,7 +64,7 @@ class BuildCards extends StatelessWidget {
             textAlign: TextAlign.center,
             style: kresultText,
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           Text(
