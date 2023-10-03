@@ -36,6 +36,35 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:374186719221:android:fdf869b488dd7e076212bc",
+        "android_client_info": {
+          "package_name": "com.frictionsa.rpcalclolreborn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "374186719221-r5n4r4kvs9p57eekeoso4acp50j4b8s7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9_PyQVEC1SYr4QHuXSORGi_JX795ZIAQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "374186719221-r5n4r4kvs9p57eekeoso4acp50j4b8s7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:374186719221:android:0203be732722059c6212bc",
         "android_client_info": {
           "package_name": "com.rpcalc"

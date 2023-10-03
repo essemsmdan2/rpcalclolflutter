@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>374186719221-ju48t4s6f58hab57kr0prttcp0ci2r7j.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAPjyzjTWWuNy-LcgD-T6haGXf1gYSblvw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>374186719221</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.frictionsa.rpcalclol</string>
+	<key>PROJECT_ID</key>
+	<string>rpcalc-6e660</string>
+	<key>STORAGE_BUCKET</key>
+	<string>rpcalc-6e660.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:374186719221:ios:5f69d959f93fc75c6212bc</string>
+</dict>
+</plist>
