@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rpcalclol/app/core/constants.dart';
-import 'package:rpcalclol/rp_calc_brain.dart';
+import 'package:rpcalclol/app/models/payment_types_model.dart';
 
 bool showList = false;
 void toggleShowList(bool value) {
@@ -8,8 +8,7 @@ void toggleShowList(bool value) {
 }
 
 class ListResults extends StatelessWidget {
-  RpCalcBrain arrayResults = RpCalcBrain();
-  var items;
+  final List<PaymentTypesModel> items;
   ListResults({Key? key, required this.items}) : super(key: key);
 
   @override
@@ -18,22 +17,18 @@ class ListResults extends StatelessWidget {
         padding: const EdgeInsets.all(0),
         itemCount: items.length,
         itemBuilder: (context, index) {
+          final item = items[index];
           return BuildCards(
-            nomePagamento: items[index]["NomePagamento"].single.toString(),
-            precoMoeda: items[index]["PreçoMoeda"].toString(),
-            precoRp: items[index]["PreçoRp"].toString(),
+            nomePagamento: item.nameType,
+            precoMoeda: item.arrayValues[0].coin.toString(),
+            precoRp: item.arrayValues[0].RP.toString(),
           );
         });
   }
 }
 
 class BuildCards extends StatelessWidget {
-  const BuildCards(
-      {Key? key,
-      required this.nomePagamento,
-      required this.precoMoeda,
-      required this.precoRp})
-      : super(key: key);
+  const BuildCards({Key? key, required this.nomePagamento, required this.precoMoeda, required this.precoRp}) : super(key: key);
 
   final String nomePagamento;
   final String precoMoeda;
@@ -77,24 +72,3 @@ class BuildCards extends StatelessWidget {
     );
   }
 }
-
-/*
-
-child: Text(
-items[index].toString(),
-textAlign: TextAlign.center,
-style: kInputMenuText,
-),
-)
-*/
-
-/*
-Container(
-color: kPrimaryColor,
-margin: const EdgeInsets.all(10),
-child: Text(
-items[index].toString(),
-textAlign: TextAlign.center,
-style: kInputMenuText,
-),
-)*/

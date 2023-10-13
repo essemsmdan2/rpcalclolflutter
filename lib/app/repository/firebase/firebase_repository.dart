@@ -1,48 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rpcalclol/app/core/payment_types.dart';
+import 'package:rpcalclol/app/models/payment_types_model.dart';
+import 'package:rpcalclol/app/repository/firebase/firebase_repository_interface.dart';
 
-class FireBaseHandler {
-  FireBaseHandler() {
-    firestore = FirebaseFirestore.instance;
-    _firestorageCollectionPaymentTypes = firestore.collection('paymentTypes');
-  }
+class FirebaseRepository implements IFirebaseRepository {
+  FirebaseRepository({required this.firestore}) {}
   late final FirebaseFirestore firestore;
-  late final CollectionReference _firestorageCollectionPaymentTypes;
-  final List _arrayTiposPag = [];
+  late final CollectionReference _firestorageCollectionPaymentTypes = firestore.collection('paymentTypes');
+  final List<PaymentTypesModel> _arrayTiposPag = [];
+  final PaymentTypesDb _paymentTypes = PaymentTypesDb();
   //a lista abaixo só é de uso em ambiente de desenvolvimento para update
-  final List _cartaoBoleto = [
-    {
-      'Cartão/Boleto': [
-        {'R\$': 16.00, 'RP': 650},
-        {'R\$': 32.00, 'RP': 1300},
-        {'R\$': 64.00, 'RP': 2600},
-        {'R\$': 113.00, 'RP': 4590},
-        {'R\$': 160.00, 'RP': 6500},
-        {'R\$': 320.00, 'RP': 13000},
-      ],
-    },
-  ];
-  final List _paySafe = [
-    {
-      'PaySafe': [
-        {'R\$': 10.0, 'RP': 405},
-        {'R\$': 20.0, 'RP': 810},
-        {'R\$': 25.0, 'RP': 1015},
-        {'R\$': 40.0, 'RP': 1620},
-        {'R\$': 50.0, 'RP': 2025},
-        {'R\$': 100.0, 'RP': 4050},
-      ],
-    },
-  ];
-  final List _celular = [
-    {
-      'CelularSms': [
-        {'R\$': 4.99, 'RP': 135},
-        {'R\$': 9.99, 'RP': 275},
-      ],
-    },
-  ];
 
-  sendUpdatePaymentTypes() async {
+  @override
+  Future<void> sendUpdatePaymentTypes() async {
+    for (var payment in _paymentTypes.allPaymentsArrayJson) {
+      _firestorageCollectionPaymentTypes.add(payment).then((value) => print("Added")).catchError((error) => print("$error"));
+    }
+  }
+
+  @override
+  Future<List<PaymentTypesModel>> getUpdatePaymentTypes() async {
+    QuerySnapshot<Object?> paymentTypesFromGet = await _firestorageCollectionPaymentTypes.get();
+    for (var payment in paymentTypesFromGet.docs) {
+      _arrayTiposPag.add(PaymentTypesModel.fromMap(payment.data() as Map<String, dynamic>));
+    }
+    return _arrayTiposPag;
+  }
+
+  @override
+  Future<void> removeAllData() async {
     await _firestorageCollectionPaymentTypes
         .get()
         .then((value) => {
@@ -50,38 +36,15 @@ class FireBaseHandler {
                 snapshot.reference.delete();
               })
             })
-        .then((value) => print('deleted'));
-
-    //return paymentTypes.add({'test': 'test'}).then((value) => print("User Added")).catchError((error) => print("Failed to' add user: $error"));
-    try {
-      for (final payment in _cartaoBoleto) {
-        _firestorageCollectionPaymentTypes
-            .add(payment)
-            .then((value) => print("User Added"))
-            .catchError((error) => print("Failed to add user: $error"));
-      }
-      for (final payment in _paySafe) {
-        _firestorageCollectionPaymentTypes
-            .add(payment)
-            .then((value) => print("User Added"))
-            .catchError((error) => print("Failed to add user: $error"));
-      }
-      for (final payment in _celular) {
-        _firestorageCollectionPaymentTypes
-            .add(payment)
-            .then((value) => print("User Added"))
-            .catchError((error) => print("Failed to add user: $error"));
-      }
-    } catch (e) {
-      print(e);
-    }
+        .then((value) => print('deleted'))
+        .catchError((error) => print("Failed to remove: $error"));
   }
 
-  Future<List<dynamic>> getUpdatePaymentTypes() async {
-    final paymentTypesFromGet = await _firestorageCollectionPaymentTypes.get();
-    for (var payment in paymentTypesFromGet.docs) {
-      _arrayTiposPag.add(payment.data());
-    }
-    return _arrayTiposPag;
+  @override
+  Future<void> projectZeroDawn() async {
+    print("running project zeroDawn ");
+    await removeAllData();
+    await sendUpdatePaymentTypes();
+    print("project zeroDawn concluded");
   }
 }
