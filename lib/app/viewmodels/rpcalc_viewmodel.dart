@@ -1,4 +1,5 @@
 import 'package:rpcalclol/app/models/payment_types_model.dart';
+import 'package:rpcalclol/app/models/payment_types_values_model.dart';
 import 'package:rpcalclol/app/presentation/pages/home/components/list_builder.dart';
 import 'package:rpcalclol/app/repository/firebase/firebase_repository_interface.dart';
 
@@ -15,7 +16,7 @@ class RpCalcViewModel {
     arrayTiposPag = await repository.getUpdatePaymentTypes();
   }
 
-  sendInputRpPrice(String inputRp) {
+  double sendInputRpPrice(String inputRp) {
     if (inputRp.isNotEmpty) {
       toggleShowList(true);
 
@@ -23,36 +24,46 @@ class RpCalcViewModel {
     } else {
       toggleShowList(false);
     }
+    return rpPriceInput;
   }
 
-  getResults() {
-    criaResultadosArray(rpPriceInput);
+  // List<PaymentTypesModel> filterRPPaymentTypes(
+  //     List<PaymentTypesModel> lista, double valorMinimoRP) {
+  //   return lista.where((paymentType) {
+  //     return paymentType.arrayValues.any((value) => value.RP <= valorMinimoRP);
+  //   }).toList();
+  // }
 
-    return arrayResultFromShuffle;
+  List<PaymentTypesModel> filterPaymentValues(
+      List<PaymentTypesModel> lista, double valorMinimoRP) {
+    final List<PaymentTypesModel> result = lista
+        .map(
+          (e) => PaymentTypesModel(
+              nameType: e.nameType,
+              arrayValues: e.arrayValues
+                  .where((element) => element.RP >= valorMinimoRP)
+                  .toList()),
+        )
+        .toList();
+    result.removeWhere((element) => element.arrayValues.isEmpty);
+    result.removeWhere((e) => e.arrayValues.first.RP >= valorMinimoRP * 2);
+
+    return result;
   }
 
-  criaResultadosArray(double rpValue) {
-    List result = [];
+  Future<List<PaymentTypesModel>> getResults({double? inputRp}) async {
+    return await _criaResultadosArray(inputRp ?? rpPriceInput);
+  }
+
+  Future<List<PaymentTypesModel>> _criaResultadosArray(double rpValue) async {
+    if (arrayTiposPag.isEmpty) {
+      arrayTiposPag = await repository.getUpdatePaymentTypes();
+    }
+
     if (arrayResultFromShuffle.isNotEmpty) {
       arrayResultFromShuffle = [];
     }
-    final rp = rpValue;
-    result = arrayResultFromShuffle.map((e) => e.arrayValues.any((element) => element.RP >= rp)).toList();
-    return result;
 
-    // for (var index = 0; index < arrayTiposPag.length; index++) {
-    //   PaymentTypesModel paymentMethod = arrayTiposPag[index];
-
-    // for (var index = 0; index < arrayValues.length; index++) {
-    //   var objPreco = arrayValues[index];
-
-    //   if (objPreco['RP']! >= rp && objPreco['RP']! <= rp * 2) {
-    //     final Map<String, dynamic> _MapResult = {};
-    //     _MapResult["NomePagamento"] = mapMetodoPag.keys;
-    //     _MapResult["PreçoRp"] = objPreco['RP'];
-    //     _MapResult["PreçoMoeda"] = objPreco['R\$'].toStringAsFixed(2);
-    //     arrayResultFromShuffle.add(PaymentTypesModel.fromMap(_MapResult));
-    //   }
-    // }
+    return arrayResultFromShuffle = filterPaymentValues(arrayTiposPag, rpValue);
   }
 }

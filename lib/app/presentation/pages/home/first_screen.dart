@@ -29,8 +29,11 @@ class _FirstScreenState extends State<FirstScreen> {
     //midnight i tell u
     //FirebaseRepository(firestore: FirebaseFirestore.instance).projectZeroDawn();
     controller = HomeController(
-        apiAdvisorViewModel: ApiAdvisorViewModel(repository: ApiAdvisorRepository(dioHttpService: DioHttpService())),
-        rpCalcViewModel: RpCalcViewModel(repository: FirebaseRepository(firestore: FirebaseFirestore.instance)));
+        apiAdvisorViewModel: ApiAdvisorViewModel(
+            repository: ApiAdvisorRepository(dioHttpService: DioHttpService())),
+        rpCalcViewModel: RpCalcViewModel(
+            repository:
+                FirebaseRepository(firestore: FirebaseFirestore.instance)));
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
@@ -86,18 +89,24 @@ class _FirstScreenState extends State<FirstScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('images/backgroundImage.jpg'))),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('images/backgroundImage.jpg'))),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Expanded(
             flex: 1,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: showList == true ? MainAxisAlignment.end : MainAxisAlignment.center,
+              mainAxisAlignment: showList == true
+                  ? MainAxisAlignment.end
+                  : MainAxisAlignment.center,
               children: [
                 TypeRpMenu(
                   onChanged: (value) {
                     setState(() {
                       controller.sendInputRpPrice(value);
+                      controller.getResults();
                     });
                   },
                 ),
@@ -108,7 +117,13 @@ class _FirstScreenState extends State<FirstScreen> {
               ? Container(
                   margin: const EdgeInsets.symmetric(horizontal: 25),
                   height: 5,
-                  decoration: const BoxDecoration(boxShadow: [BoxShadow(color: Colors.black, offset: Offset(0, 2), blurRadius: 8, spreadRadius: 3)]),
+                  decoration: const BoxDecoration(boxShadow: [
+                    BoxShadow(
+                        color: Colors.black,
+                        offset: Offset(0, 2),
+                        blurRadius: 8,
+                        spreadRadius: 3)
+                  ]),
                 )
               : const SizedBox(
                   height: 1,
