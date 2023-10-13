@@ -6,7 +6,8 @@ import 'package:rpcalclol/app/repository/firebase/firebase_repository_interface.
 class FirebaseRepository implements IFirebaseRepository {
   FirebaseRepository({required this.firestore}) {}
   late final FirebaseFirestore firestore;
-  late final CollectionReference _firestorageCollectionPaymentTypes = firestore.collection('paymentTypes');
+  late final CollectionReference _firestorageCollectionPaymentTypes =
+      firestore.collection('paymentTypes');
   final List<PaymentTypesModel> _arrayTiposPag = [];
   final PaymentTypesDb _paymentTypes = PaymentTypesDb();
   //a lista abaixo só é de uso em ambiente de desenvolvimento para update
@@ -14,15 +15,22 @@ class FirebaseRepository implements IFirebaseRepository {
   @override
   Future<void> sendUpdatePaymentTypes() async {
     for (var payment in _paymentTypes.allPaymentsArrayJson) {
-      _firestorageCollectionPaymentTypes.add(payment).then((value) => print("Added")).catchError((error) => print("$error"));
+      _firestorageCollectionPaymentTypes
+          .add(payment)
+          .then((value) => print("Added ${payment["nameType"]}"))
+          .catchError(
+            (error) => print("$error"),
+          );
     }
   }
 
   @override
   Future<List<PaymentTypesModel>> getUpdatePaymentTypes() async {
-    QuerySnapshot<Object?> paymentTypesFromGet = await _firestorageCollectionPaymentTypes.get();
+    QuerySnapshot<Object?> paymentTypesFromGet =
+        await _firestorageCollectionPaymentTypes.get();
     for (var payment in paymentTypesFromGet.docs) {
-      _arrayTiposPag.add(PaymentTypesModel.fromMap(payment.data() as Map<String, dynamic>));
+      _arrayTiposPag.add(
+          PaymentTypesModel.fromMap(payment.data() as Map<String, dynamic>));
     }
     return _arrayTiposPag;
   }

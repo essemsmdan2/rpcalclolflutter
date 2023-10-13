@@ -15,7 +15,7 @@ class RpCalcViewModel {
     arrayTiposPag = await repository.getUpdatePaymentTypes();
   }
 
-  sendInputRpPrice(String inputRp) {
+  double sendInputRpPrice(String inputRp) {
     if (inputRp.isNotEmpty) {
       toggleShowList(true);
 
@@ -23,36 +23,31 @@ class RpCalcViewModel {
     } else {
       toggleShowList(false);
     }
+    return rpPriceInput;
   }
 
-  getResults() {
-    criaResultadosArray(rpPriceInput);
-
-    return arrayResultFromShuffle;
+  List<PaymentTypesModel> filtrarPorRP(
+      List<PaymentTypesModel> lista, double valorMinimoRP) {
+    return lista.where((paymentType) {
+      return paymentType.arrayValues.any((value) => value.RP > valorMinimoRP);
+    }).toList();
   }
 
-  criaResultadosArray(double rpValue) {
-    List result = [];
+  Future<List<PaymentTypesModel>> getResults({double? inputRp}) async {
+    return await _criaResultadosArray(inputRp ?? rpPriceInput);
+  }
+
+  Future<List<PaymentTypesModel>> _criaResultadosArray(double rpValue) async {
+    List<PaymentTypesModel> result = [];
+    if (arrayTiposPag.isEmpty) {
+      arrayTiposPag = await repository.getUpdatePaymentTypes();
+    }
+
     if (arrayResultFromShuffle.isNotEmpty) {
       arrayResultFromShuffle = [];
     }
     final rp = rpValue;
-    result = arrayResultFromShuffle.map((e) => e.arrayValues.any((element) => element.RP >= rp)).toList();
+    result = filtrarPorRP(arrayTiposPag, rp);
     return result;
-
-    // for (var index = 0; index < arrayTiposPag.length; index++) {
-    //   PaymentTypesModel paymentMethod = arrayTiposPag[index];
-
-    // for (var index = 0; index < arrayValues.length; index++) {
-    //   var objPreco = arrayValues[index];
-
-    //   if (objPreco['RP']! >= rp && objPreco['RP']! <= rp * 2) {
-    //     final Map<String, dynamic> _MapResult = {};
-    //     _MapResult["NomePagamento"] = mapMetodoPag.keys;
-    //     _MapResult["PreçoRp"] = objPreco['RP'];
-    //     _MapResult["PreçoMoeda"] = objPreco['R\$'].toStringAsFixed(2);
-    //     arrayResultFromShuffle.add(PaymentTypesModel.fromMap(_MapResult));
-    //   }
-    // }
   }
 }
