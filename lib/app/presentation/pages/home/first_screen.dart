@@ -27,7 +27,7 @@ class _FirstScreenState extends State<FirstScreen> {
   void initState() {
     super.initState();
     //midnight i tell u
-    FirebaseRepository(firestore: FirebaseFirestore.instance).projectZeroDawn();
+    //FirebaseRepository(firestore: FirebaseFirestore.instance).projectZeroDawn();
     controller = HomeController(
         apiAdvisorViewModel: ApiAdvisorViewModel(
             repository: ApiAdvisorRepository(dioHttpService: DioHttpService())),
@@ -106,6 +106,7 @@ class _FirstScreenState extends State<FirstScreen> {
                   onChanged: (value) {
                     setState(() {
                       controller.sendInputRpPrice(value);
+                      controller.getResults();
                     });
                   },
                 ),

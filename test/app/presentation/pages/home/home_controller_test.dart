@@ -33,7 +33,7 @@ void main() async {
       });
       test('- Test RpCalcViewModel', () async {
         controller.rpCalcViewModel.repository.sendUpdatePaymentTypes();
-        final result = await controller.getResults(inputRp: 640);
+        final result = await controller.getResults(inputRp: 130);
         print(result.map(
             (e) => "${e.nameType} valores:${e.arrayValues.map((e) => e.RP)}"));
       });

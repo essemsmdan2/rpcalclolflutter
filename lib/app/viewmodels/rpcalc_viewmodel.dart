@@ -1,4 +1,5 @@
 import 'package:rpcalclol/app/models/payment_types_model.dart';
+import 'package:rpcalclol/app/models/payment_types_values_model.dart';
 import 'package:rpcalclol/app/presentation/pages/home/components/list_builder.dart';
 import 'package:rpcalclol/app/repository/firebase/firebase_repository_interface.dart';
 
@@ -26,11 +27,28 @@ class RpCalcViewModel {
     return rpPriceInput;
   }
 
-  List<PaymentTypesModel> filtrarPorRP(
+  // List<PaymentTypesModel> filterRPPaymentTypes(
+  //     List<PaymentTypesModel> lista, double valorMinimoRP) {
+  //   return lista.where((paymentType) {
+  //     return paymentType.arrayValues.any((value) => value.RP <= valorMinimoRP);
+  //   }).toList();
+  // }
+
+  List<PaymentTypesModel> filterPaymentValues(
       List<PaymentTypesModel> lista, double valorMinimoRP) {
-    return lista.where((paymentType) {
-      return paymentType.arrayValues.any((value) => value.RP > valorMinimoRP);
-    }).toList();
+    final List<PaymentTypesModel> result = lista
+        .map(
+          (e) => PaymentTypesModel(
+              nameType: e.nameType,
+              arrayValues: e.arrayValues
+                  .where((element) => element.RP >= valorMinimoRP)
+                  .toList()),
+        )
+        .toList();
+    result.removeWhere((element) => element.arrayValues.isEmpty);
+    result.removeWhere((e) => e.arrayValues.first.RP >= valorMinimoRP * 2);
+
+    return result;
   }
 
   Future<List<PaymentTypesModel>> getResults({double? inputRp}) async {
@@ -38,7 +56,6 @@ class RpCalcViewModel {
   }
 
   Future<List<PaymentTypesModel>> _criaResultadosArray(double rpValue) async {
-    List<PaymentTypesModel> result = [];
     if (arrayTiposPag.isEmpty) {
       arrayTiposPag = await repository.getUpdatePaymentTypes();
     }
@@ -46,8 +63,7 @@ class RpCalcViewModel {
     if (arrayResultFromShuffle.isNotEmpty) {
       arrayResultFromShuffle = [];
     }
-    final rp = rpValue;
-    result = filtrarPorRP(arrayTiposPag, rp);
-    return result;
+
+    return arrayResultFromShuffle = filterPaymentValues(arrayTiposPag, rpValue);
   }
 }
