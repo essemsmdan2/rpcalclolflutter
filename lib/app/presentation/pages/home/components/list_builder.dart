@@ -18,17 +18,31 @@ class ListResults extends StatelessWidget {
         itemCount: items.length,
         itemBuilder: (context, index) {
           final item = items[index];
-          return BuildCards(
-            nomePagamento: item.nameType,
-            precoMoeda: item.arrayValues[0].coin.toString(),
-            precoRp: item.arrayValues[0].RP.toString(),
+          return Column(
+            children: item.arrayValues
+                .asMap()
+                .map((i, e) => MapEntry(
+                      i,
+                      BuildCards(
+                        nomePagamento: item.nameType,
+                        precoMoeda: e.coin.toString(),
+                        precoRp: e.RP.toString(),
+                      ),
+                    ))
+                .values
+                .toList(),
           );
         });
   }
 }
 
 class BuildCards extends StatelessWidget {
-  const BuildCards({Key? key, required this.nomePagamento, required this.precoMoeda, required this.precoRp}) : super(key: key);
+  const BuildCards(
+      {Key? key,
+      required this.nomePagamento,
+      required this.precoMoeda,
+      required this.precoRp})
+      : super(key: key);
 
   final String nomePagamento;
   final String precoMoeda;
