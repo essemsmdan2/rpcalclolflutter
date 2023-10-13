@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:rpcalclol/app/core/constants.dart';
 
 class TypeRpMenu extends StatefulWidget {
-  Function onChanged;
+  final Function onChanged;
 
   TypeRpMenu({Key? key, required this.onChanged}) : super(key: key);
 
@@ -47,8 +47,7 @@ class _TypeRpMenuState extends State<TypeRpMenu> {
           ),
           const SizedBox(height: 15),
           Container(
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(5)),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
             padding: const EdgeInsets.all(10),
             child: IntrinsicHeight(
               child: Row(
@@ -68,16 +67,13 @@ class _TypeRpMenuState extends State<TypeRpMenu> {
                   Expanded(
                     child: TextField(
                       keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
-                      ],
+                      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
                       onChanged: (value) {
                         widget.onChanged(value);
                       },
                       controller: myController,
                       textAlign: TextAlign.center,
-                      style:
-                          const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(0),
