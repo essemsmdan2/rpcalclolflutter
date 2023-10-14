@@ -131,8 +131,11 @@ class _FirstScreenState extends State<FirstScreen> {
           showList == true
               ? Expanded(
                   flex: 1,
-                  child: ListResults(
-                    items: controller.result,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 35.0),
+                    child: ListResults(
+                      items: controller.result,
+                    ),
                   ),
                 )
               : const SizedBox(

@@ -18,17 +18,37 @@ class ListResults extends StatelessWidget {
         itemCount: items.length,
         itemBuilder: (context, index) {
           final item = items[index];
-          return BuildCards(
-            nomePagamento: item.nameType,
-            precoMoeda: item.arrayValues[0].coin.toString(),
-            precoRp: item.arrayValues[0].RP.toString(),
+          return SingleChildScrollView(
+            padding: EdgeInsets.symmetric(
+              horizontal: 72,
+            ),
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: item.arrayValues
+                  .asMap()
+                  .map((i, e) => MapEntry(
+                        i,
+                        BuildCards(
+                          nomePagamento: item.nameType,
+                          precoMoeda: e.coin.toString(),
+                          precoRp: e.RP.toString(),
+                        ),
+                      ))
+                  .values
+                  .toList(),
+            ),
           );
         });
   }
 }
 
 class BuildCards extends StatelessWidget {
-  const BuildCards({Key? key, required this.nomePagamento, required this.precoMoeda, required this.precoRp}) : super(key: key);
+  const BuildCards(
+      {Key? key,
+      required this.nomePagamento,
+      required this.precoMoeda,
+      required this.precoRp})
+      : super(key: key);
 
   final String nomePagamento;
   final String precoMoeda;
@@ -37,6 +57,7 @@ class BuildCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width / 1.5,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: kPrimaryColor.withOpacity(0.9),
@@ -50,7 +71,7 @@ class BuildCards extends StatelessWidget {
           ),
         ],
       ),
-      margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
+      margin: const EdgeInsets.only(right: 10, top: 10, bottom: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
