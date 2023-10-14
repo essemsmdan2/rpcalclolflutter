@@ -27,15 +27,11 @@ class RpCalcViewModel {
     return rpPriceInput;
   }
 
-  // List<PaymentTypesModel> filterRPPaymentTypes(
-  //     List<PaymentTypesModel> lista, double valorMinimoRP) {
-  //   return lista.where((paymentType) {
-  //     return paymentType.arrayValues.any((value) => value.RP <= valorMinimoRP);
-  //   }).toList();
-  // }
-
   List<PaymentTypesModel> filterPaymentValues(
       List<PaymentTypesModel> lista, double valorMinimoRP) {
+    if (valorMinimoRP < 100) {
+      valorMinimoRP = 100;
+    }
     final List<PaymentTypesModel> result = lista
         .map(
           (e) => PaymentTypesModel(
@@ -47,7 +43,9 @@ class RpCalcViewModel {
         .toList();
     result.removeWhere((element) => element.arrayValues.isEmpty);
     result.removeWhere((e) => e.arrayValues.first.RP >= valorMinimoRP * 2);
-
+    result.forEach((element) {
+      element.arrayValues.removeWhere((e) => e.RP > valorMinimoRP * 2);
+    });
     return result;
   }
 
